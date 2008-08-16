@@ -1,23 +1,23 @@
 Name:		dblatex
-Version:	0.2.8
-Release:	%mkrel 2
+Version:	0.2.9
+Release:	%mkrel 1
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
 License:	GPLv2+
 URL:		http://dblatex.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
 #Source1:        http://docbook.sourceforge.net/release/xsl/current/COPYING
 Source1:        COPYING-docbook-xsl
 Patch0:		dblatex-0.2.7-external-which.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %py_requires -d
-BuildRequires:	libxslt-proc tetex ImageMagick tetex-latex python-which
+BuildRequires:	libxslt-proc tetex ImageMagick texlive-latex python-which
 Requires:	tetex libxslt-proc docbook-dtd44-xml xmltex tetex-latex ImageMagick transfig
 #BuildRequires:  tetex-fonts
-Requires(post): tetex
-Requires(postun):	tetex
+Requires(post): texlive
+Requires(postun): texlive
 
 %description
 dblatex is a program that transforms your SGML/XMLDocBook
