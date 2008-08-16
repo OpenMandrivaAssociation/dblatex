@@ -54,7 +54,7 @@ for file in ` find $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/ -name '*.sty' ` ; d
   mv $file $RPM_BUILD_ROOT%{_datadir}/texmf/tex/latex/dblatex/`basename $file`;
 done
 
-rmdir $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/{misc,contrib/example,style}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/{misc,contrib/example,style}
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dblatex
 # shipped in %%docs
