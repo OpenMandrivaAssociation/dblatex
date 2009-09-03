@@ -1,6 +1,6 @@
 Name:		dblatex
 Version:	0.2.9
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
