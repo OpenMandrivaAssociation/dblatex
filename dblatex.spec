@@ -13,7 +13,7 @@ Patch0:		dblatex-0.2.7-external-which.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %py_requires -d
-BuildRequires:	libxslt-proc texlive imagemagick texlive-latex python-which
+BuildRequires:	libxslt-proc tetex imagemagick tetex-latex python-which
 Requires:	tetex libxslt-proc docbook-dtd44-xml xmltex tetex-latex imagemagick transfig
 #BuildRequires:  tetex-fonts
 Requires(post): tetex
