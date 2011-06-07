@@ -1,6 +1,6 @@
 Name:		dblatex
 Version:	0.3
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
@@ -14,7 +14,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %py_requires -d
 BuildRequires:	libxslt-proc tetex imagemagick tetex-latex python-which
-Requires:	tetex libxslt-proc docbook-dtd44-xml xmltex tetex-latex imagemagick transfig
+Requires:	tetex libxslt-proc docbook-dtd-xml xmltex tetex-latex imagemagick transfig
 #BuildRequires:  tetex-fonts
 Requires(post): tetex
 Requires(postun): tetex
