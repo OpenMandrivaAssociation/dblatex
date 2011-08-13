@@ -1,6 +1,6 @@
 Name:		dblatex
 Version:	0.3
-Release:	%mkrel 4
+Release:	%mkrel 5
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
@@ -15,9 +15,8 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 %py_requires -d
 BuildRequires:	libxslt-proc tetex imagemagick tetex-latex python-which
 Requires:	tetex libxslt-proc docbook-dtd44-xml docbook-dtd45-xml xmltex tetex-latex imagemagick transfig
-#BuildRequires:  tetex-fonts
-Requires(post): tetex
-Requires(postun): tetex
+Requires(post): texlive
+Requires(postun): texlive
 
 %description
 dblatex is a program that transforms your SGML/XMLDocBook
@@ -80,7 +79,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/texmf/tex/latex/dblatex/
 %dir %{_sysconfdir}/dblatex
 
-%post -p /usr/bin/texhash
+%post
+if [ -x %{_bindir}/mktexlsr ]; then
+    %{_bindir}/mktexlsr
+fi
 
-%postun -p /usr/bin/texhash
-
+%postun
+if [ -x %{_bindir}/mktexlsr ]; then
+    %{_bindir}/mktexlsr
+fi
