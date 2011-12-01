@@ -40,24 +40,24 @@ rm -r lib/contrib
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-#%{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
-%{__python} setup.py install --root $RPM_BUILD_ROOT
+rm -rf %{buildroot}
+#%{__python} setup.py install --skip-build --root %{buildroot}
+%{__python} setup.py install --root %{buildroot}
 # these are already in tetex-latex:
 for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/; do
-  rm -rf $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/misc/$file
+  rm -rf %{buildroot}%{_datadir}/dblatex/latex/misc/$file
 done
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/texmf/tex/latex/dblatex
-for file in ` find $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/ -name '*.sty' ` ; do 
-  mv $file $RPM_BUILD_ROOT%{_datadir}/texmf/tex/latex/dblatex/`basename $file`;
+mkdir -p %{buildroot}%{_datadir}/texmf/tex/latex/dblatex
+for file in ` find %{buildroot}%{_datadir}/dblatex/latex/ -name '*.sty' ` ; do 
+  mv $file %{buildroot}%{_datadir}/texmf/tex/latex/dblatex/`basename $file`;
 done
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/{misc,contrib/example,style}
+rm -rf %{buildroot}%{_datadir}/dblatex/latex/{misc,contrib/example,style}
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dblatex
+mkdir -p %{buildroot}%{_sysconfdir}/dblatex
 # shipped in %%docs
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/
+rm -rf %{buildroot}%{_datadir}/doc/
 
 sed -e 's/\r//' xsl/mathml2/README > README-xsltml
 touch -r xsl/mathml2/README README-xsltml
@@ -65,7 +65,7 @@ cp -p %{SOURCE1} COPYING-docbook-xsl
 
  
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %files
