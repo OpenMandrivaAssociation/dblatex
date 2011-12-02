@@ -1,6 +1,6 @@
 Name:		dblatex
-Version:	0.3
-Release:	%mkrel 5
+Version:	0.3.2
+Release:	1
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
@@ -10,13 +10,12 @@ Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
 #Source1:        http://docbook.sourceforge.net/release/xsl/current/COPYING
 Source1:        COPYING-docbook-xsl
 Patch0:		dblatex-0.2.7-external-which.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %py_requires -d
-BuildRequires:	libxslt-proc tetex imagemagick tetex-latex python-which
-Requires:	tetex libxslt-proc docbook-dtd44-xml docbook-dtd45-xml xmltex tetex-latex imagemagick transfig
-Requires(post): texlive
-Requires(postun): texlive
+BuildRequires:	libxslt-proc texlive imagemagick python-which
+Requires:	libxslt-proc docbook-dtd44-xml docbook-dtd45-xml xmltex texlive imagemagick transfig
+Requires(post): texlive-kpathsea.bin
+Requires(postun): texlive-kpathsea.bin
 
 %description
 dblatex is a program that transforms your SGML/XMLDocBook
@@ -63,13 +62,8 @@ sed -e 's/\r//' xsl/mathml2/README > README-xsltml
 touch -r xsl/mathml2/README README-xsltml
 cp -p %{SOURCE1} COPYING-docbook-xsl
 
- 
-%clean
-rm -rf %{buildroot}
-
 
 %files
-%defattr(-,root,root,-)
 %{_mandir}/man1/dblatex.1*
 %doc COPYRIGHT docs/manual.pdf COPYING-docbook-xsl README-xsltml
 %{python_sitelib}/dbtexmf/
@@ -77,7 +71,7 @@ rm -rf %{buildroot}
 %{_bindir}/dblatex
 %{_datadir}/dblatex/
 %{_datadir}/texmf/tex/latex/dblatex/
-%dir %{_sysconfdir}/dblatex
+%dir %{_sysconfdir}/dblatex/
 
 %post
 if [ -x %{_bindir}/mktexlsr ]; then
