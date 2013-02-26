@@ -31,7 +31,6 @@ Authors:
 %prep
 %setup -q
 %patch0 -p1 -b .external-which
-rm -r lib/contrib
 
 %build
 %{__python} setup.py build
