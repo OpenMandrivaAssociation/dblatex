@@ -1,6 +1,6 @@
 Name:		dblatex
-Version:	0.3
-Release:	6
+Version:	0.3.4
+Release:	1
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 BuildArch:	noarch
 Group:		Publishing
