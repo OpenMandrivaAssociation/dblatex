@@ -9,6 +9,7 @@ URL:		http://dblatex.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
 Source1:        COPYING-docbook-xsl
 Patch0:		dblatex-0.2.7-external-which.patch
+Patch1:		dblatex-0.3.4-build-fix.patch
 
 %py_requires -d
 BuildRequires:	libxslt-proc tetex imagemagick tetex-latex python-which
@@ -31,6 +32,7 @@ Authors:
 %prep
 %setup -q
 %patch0 -p1 -b .external-which
+%patch1 -p0 -b .build-fix
 
 %build
 %{__python} setup.py build
