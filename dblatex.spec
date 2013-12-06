@@ -11,7 +11,7 @@ Patch0:		dblatex-0.2.7-external-which.patch
 Patch1:		dblatex-0.3.4-build-fix.patch
 BuildArch:	noarch
 
-%py_requires -d
+BuildRequires:	python-devel
 BuildRequires:	imagemagick
 BuildRequires:	python-which
 BuildRequires:	tetex
