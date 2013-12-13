@@ -2,7 +2,7 @@
 
 Name:       dblatex
 Version:    0.3.4
-Release:    8%{?dist}
+Release:    9%{?dist}
 Summary:    DocBook to LaTeX/ConTeXt Publishing
 BuildArch:  noarch
 # Most of package is GPLv2+, except:
@@ -91,6 +91,12 @@ cp -p %{SOURCE1} COPYING-docbook-xsl
 %{_datadir}/texlive/texmf-dist/tex/latex/dblatex/
 %dir %{_sysconfdir}/dblatex
 
-%post -p /usr/bin/texhash
+%post
+%{_bindir}/mktexlsr
+exit 0
 
-%postun -p /usr/bin/texhash
+%postun
+if [ $1 -eq 0 ] ; then
+    %{_bindir}/mktexlsr
+fi
+exit 0
