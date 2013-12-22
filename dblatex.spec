@@ -19,16 +19,17 @@ Source1:    COPYING-docbook-xsl
 Patch0:     dblatex-0.2.7-external-which.patch
 Patch1:     dblatex-disable-debian.patch
 
-BuildRequires:  python-devel
-BuildRequires:  python-which
-BuildRequires:  pkgconfig(libxslt)
-BuildRequires:  imagemagick
-BuildRequires:  texlive
-BuildRequires:  transfig
-Requires:       texlive
-Requires:       xsltproc docbook-dtds
-Requires:       transfig
-Requires:       imagemagick
+BuildRequires:	python-devel
+BuildRequires:	python-which
+BuildRequires:	pkgconfig(libxslt)
+BuildRequires:	python-libxslt
+BuildRequires:	imagemagick
+BuildRequires:	texlive
+BuildRequires:	transfig
+Requires:	texlive
+Requires:	xsltproc docbook-dtds
+Requires:	transfig
+Requires:	imagemagick
 
 %description
 dblatex is a program that transforms your SGML/XMLDocBook
