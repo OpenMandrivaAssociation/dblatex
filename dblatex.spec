@@ -24,12 +24,14 @@ BuildRequires:	python-which
 BuildRequires:	pkgconfig(libxslt)
 BuildRequires:	python-libxslt
 BuildRequires:	imagemagick
-BuildRequires:	texlive
+BuildRequires:	texlive texlive-latex
 BuildRequires:	transfig
-Requires:	texlive
+BuildRequires:	xsltproc
+Requires:	texlive texlive-latex
 Requires:	xsltproc docbook-dtds
 Requires:	transfig
 Requires:	imagemagick
+Requires(post,postun):	kpathsea
 
 %description
 dblatex is a program that transforms your SGML/XMLDocBook
@@ -93,11 +95,13 @@ cp -p %{SOURCE1} COPYING-docbook-xsl
 %dir %{_sysconfdir}/dblatex
 
 %post
+%{_bindir}/texhash
 %{_bindir}/mktexlsr
 exit 0
 
 %postun
 if [ $1 -eq 0 ] ; then
-    %{_bindir}/mktexlsr
+	%{_bindir}/texhash
+	%{_bindir}/mktexlsr
 fi
 exit 0
