@@ -2,7 +2,7 @@
 
 Name:       dblatex
 Version:    0.3.4
-Release:    9%{?dist}
+Release:    10
 Summary:    DocBook to LaTeX/ConTeXt Publishing
 BuildArch:  noarch
 # Most of package is GPLv2+, except:
@@ -21,12 +21,12 @@ Patch1:     dblatex-disable-debian.patch
 
 BuildRequires:  python-devel
 BuildRequires:  python-which
-BuildRequires:  libxslt
+BuildRequires:  pkgconfig(libxslt)
 BuildRequires:  imagemagick
 BuildRequires:  texlive
 BuildRequires:  transfig
 Requires:       texlive
-Requires:       libxslt docbook-dtds
+Requires:       xsltproc docbook-dtds
 Requires:       transfig
 Requires:       imagemagick
 
