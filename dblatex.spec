@@ -17,6 +17,7 @@ BuildRequires:	python-which
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
 BuildRequires:	xsltproc
+BuildRequires: pkgconfig(python)
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
