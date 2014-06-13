@@ -1,36 +1,30 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
-Name:       dblatex
-Version:    0.3.4
-Release:    10
-Summary:    DocBook to LaTeX/ConTeXt Publishing
-BuildArch:  noarch
-# Most of package is GPLv2+, except:
-# xsl/ directory is DMIT
-# lib/dbtexmf/core/sgmlent.txt is Public Domain
-# latex/misc/enumitem.sty, multirow2.sry and ragged2e.sty are LPPL
-# latex/misc/lastpage.sty is GPLv2 (no +)
-# latex/misc/passivetex is MIT (not included in binary RPM so not listed)
-License:    GPLv2+ and GPLv2 and LPPL and DMIT and Public Domain
-URL:        http://dblatex.sourceforge.net/
-Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
-# Source1 is from http://docbook.sourceforge.net/release/xsl/current/COPYING
-Source1:    COPYING-docbook-xsl
-Patch0:     dblatex-0.2.7-external-which.patch
-Patch1:     dblatex-disable-debian.patch
+Summary:	DocBook to LaTeX/ConTeXt Publishing
+Name:		dblatex
+Version:	0.3.4
+Release:	12
+Group:		Publishing
+License:	GPLv2+
+Url:		http://dblatex.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
+Source1:	COPYING-docbook-xsl
+Patch0:		dblatex-0.2.7-external-which.patch
+Patch1:		dblatex-0.3.4-build-fix.patch
+BuildArch:	noarch
 
 BuildRequires:	python-devel
-BuildRequires:	python-which
-BuildRequires:	pkgconfig(libxslt)
-BuildRequires:	python-libxslt
 BuildRequires:	imagemagick
-BuildRequires:	texlive texlive-latex
-BuildRequires:	transfig
+BuildRequires:	python-which
+BuildRequires:	tetex
+BuildRequires:	tetex-latex
 BuildRequires:	xsltproc
-Requires:	texlive texlive-latex
-Requires:	xsltproc docbook-dtds
-Requires:	transfig
+Requires:	docbook-dtd44-xml
+Requires:	docbook-dtd45-xml
 Requires:	imagemagick
+Requires:	tetex
+Requires:	tetex-latex
+Requires:	transfig
+Requires:	xmltex
+Requires:	xsltproc
 Requires(post,postun):	kpathsea
 
 %description
@@ -39,50 +33,41 @@ documents to DVI, PostScript or PDF by translating them
 into pure LaTeX as a first process.  MathML 2.0 markups
 are supported, too. It started as a clone of DB2LaTeX.
 
-Authors:
---------
-   Benoît Guillon <marsgui at users dot sourceforge dot net>
-   Andreas Hoenen <andreas dot hoenen at arcor dot de>
-
-
 %prep
 %setup -q
-%patch0 -p1 -b .external-which
-%patch1 -p1 -b .disable-debian
-rm -rf lib/contrib
+%apply_patches
 
 %build
-%{__python} setup.py build
-
+python setup.py build
 
 %install
-#%{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
-%{__python} setup.py install --root $RPM_BUILD_ROOT
+python setup.py install --root %{buildroot}
 # these are already in tetex-latex:
-for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/ xelatex/; do
-  rm -rf $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/misc/$file
+for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/; do
+	rm -rf %{buildroot}%{_datadir}/dblatex/latex/misc/$file
 done
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/texlive/texmf-dist/tex/latex/dblatex
-for file in ` find $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/ -name '*.sty' ` ; do
-  mv $file $RPM_BUILD_ROOT%{_datadir}/texlive/texmf-dist/tex/latex/dblatex/`basename $file`;
+mkdir -p %{buildroot}%{_datadir}/texmf/tex/latex/dblatex
+for file in ` find %{buildroot}%{_datadir}/dblatex/latex/ -name '*.sty' ` ; do 
+	mv $file %{buildroot}%{_datadir}/texmf/tex/latex/dblatex/`basename $file`;
 done
 
-## also move .xetex files
-for file in ` find $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/ -name '*.xetex' ` ; do
-  mv $file $RPM_BUILD_ROOT%{_datadir}/texlive/texmf-dist/tex/latex/dblatex/`basename $file`;
-done
+rm -rf %{buildroot}%{_datadir}/dblatex/latex/{misc,contrib/example,style}
 
-rmdir $RPM_BUILD_ROOT%{_datadir}/dblatex/latex/{misc,contrib/example,style}
-
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/dblatex
+mkdir -p %{buildroot}%{_sysconfdir}/dblatex
 # shipped in %%docs
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/
+rm -rf %{buildroot}%{_datadir}/doc/
 
 sed -e 's/\r//' xsl/mathml2/README > README-xsltml
 touch -r xsl/mathml2/README README-xsltml
 cp -p %{SOURCE1} COPYING-docbook-xsl
+chmod +x %{buildroot}/%{python_sitelib}/dbtexmf/dblatex/xetex/*.py
 
+%post
+/usr/bin/texhash
+
+%postun
+/usr/bin/texhash
 
 %files
 %{_mandir}/man1/dblatex.1*
@@ -91,17 +76,6 @@ cp -p %{SOURCE1} COPYING-docbook-xsl
 %{python_sitelib}/dblatex-*.egg-info
 %{_bindir}/dblatex
 %{_datadir}/dblatex/
-%{_datadir}/texlive/texmf-dist/tex/latex/dblatex/
+%{_datadir}/texmf/tex/latex/dblatex/
 %dir %{_sysconfdir}/dblatex
 
-%post
-%{_bindir}/texhash
-%{_bindir}/mktexlsr
-exit 0
-
-%postun
-if [ $1 -eq 0 ] ; then
-	%{_bindir}/texhash
-	%{_bindir}/mktexlsr
-fi
-exit 0
