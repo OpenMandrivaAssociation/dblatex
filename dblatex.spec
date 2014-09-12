@@ -1,17 +1,17 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
-Version:	0.3.4
-Release:	13
+Version:	0.3.5
+Release:	1
 Group:		Publishing
 License:	GPLv2+
 Url:		http://dblatex.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
 Source1:	COPYING-docbook-xsl
 Patch0:		dblatex-0.2.7-external-which.patch
-Patch1:		dblatex-0.3.4-build-fix.patch
+Patch1:		dblatex-disable-debian.patch
 BuildArch:	noarch
 
-BuildRequires:	python-devel
+BuildRequires:	python2-devel
 BuildRequires:	imagemagick
 BuildRequires:	python-which
 BuildRequires:	tetex
@@ -38,10 +38,10 @@ are supported, too. It started as a clone of DB2LaTeX.
 %apply_patches
 
 %build
-python setup.py build
+%{__python2} setup.py build
 
 %install
-python setup.py install --root %{buildroot}
+%{__python2} setup.py install --root %{buildroot}
 # these are already in tetex-latex:
 for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/; do
 	rm -rf %{buildroot}%{_datadir}/dblatex/latex/misc/$file
@@ -72,10 +72,9 @@ chmod +x %{buildroot}/%{python_sitelib}/dbtexmf/dblatex/xetex/*.py
 %files
 %{_mandir}/man1/dblatex.1*
 %doc COPYRIGHT docs/manual.pdf COPYING-docbook-xsl README-xsltml
-%{python_sitelib}/dbtexmf/
-%{python_sitelib}/dblatex-*.egg-info
+%{python2_sitelib}/dbtexmf/
+%{python2_sitelib}/dblatex-*.egg-info
 %{_bindir}/dblatex
 %{_datadir}/dblatex/
 %{_datadir}/texmf/tex/latex/dblatex/
 %dir %{_sysconfdir}/dblatex
-
