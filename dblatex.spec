@@ -61,7 +61,9 @@ rm -rf %{buildroot}%{_datadir}/doc/
 sed -e 's/\r//' xsl/mathml2/README > README-xsltml
 touch -r xsl/mathml2/README README-xsltml
 cp -p %{SOURCE1} COPYING-docbook-xsl
-chmod +x %{buildroot}/%{python_sitelib}/dbtexmf/dblatex/xetex/*.py
+chmod +x %{buildroot}/%{py2_puresitedir}/dbtexmf/dblatex/xetex/*.py
+
+sed -i 's|python|python2|' %{buildroot}/%{_bindir}/dblatex
 
 %post
 /usr/bin/texhash
