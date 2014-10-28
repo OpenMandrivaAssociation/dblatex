@@ -16,12 +16,14 @@ BuildRequires:	imagemagick
 BuildRequires:	python-which
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
+BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
 Requires:	tetex
 Requires:	tetex-latex
+Requires:	texlive-latex-bin
 Requires:	transfig
 Requires:	xmltex
 Requires:	xsltproc
