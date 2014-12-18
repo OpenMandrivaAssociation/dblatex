@@ -1,7 +1,7 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
 Version:	0.3.5
-Release:	2
+Release:	3
 Group:		Publishing
 License:	GPLv2+
 Url:		http://dblatex.sourceforge.net/
@@ -12,6 +12,7 @@ Patch1:		dblatex-disable-debian.patch
 BuildArch:	noarch
 
 BuildRequires:	python2-devel
+BuildRequires:	python-setuptools
 BuildRequires:	imagemagick
 BuildRequires:	python-which
 BuildRequires:	tetex
