@@ -1,7 +1,7 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
-Version:	0.3.5
-Release:	5
+Version:	0.3.7
+Release:	1
 Group:		Publishing
 License:	GPLv2+
 Url:		http://dblatex.sourceforge.net/
