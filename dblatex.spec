@@ -1,11 +1,11 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
-Version:	0.3.7
+Version:	0.3.10
 Release:	1
 Group:		Publishing
 License:	GPLv2+
-Url:		http://dblatex.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/dblatex/dblatex-%{version}.tar.bz2
+Url:		https://pypi.python.org/pypi/dblatex
+Source0:	https://pypi.python.org/packages/a8/1c/a07b54389399ac0c014c175936eb142f562468c607150a2df3e94d365611/dblatex-%{version}.tar.bz2
 Source1:	COPYING-docbook-xsl
 Patch0:		dblatex-0.2.7-external-which.patch
 Patch1:		dblatex-disable-debian.patch
