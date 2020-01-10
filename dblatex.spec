@@ -38,7 +38,7 @@ are supported, too. It started as a clone of DB2LaTeX.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %{__python2} setup.py build
