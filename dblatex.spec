@@ -1,20 +1,19 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
-Version:	0.3.10
-Release:	2
+Version:	0.3.11
+Release:	1
 Group:		Publishing
 License:	GPLv2+
 Url:		https://pypi.python.org/pypi/dblatex
-Source0:	https://pypi.python.org/packages/a8/1c/a07b54389399ac0c014c175936eb142f562468c607150a2df3e94d365611/dblatex-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}py3.tar.bz2
 Source1:	COPYING-docbook-xsl
-Patch0:		dblatex-0.2.7-external-which.patch
+Patch0:		dblatex-0.3.11-which-shutil.patch
 Patch1:		dblatex-disable-debian.patch
 BuildArch:	noarch
 
-BuildRequires:	python2-devel
-BuildRequires:	python2-setuptools
+BuildRequires:	python3-devel
+BuildRequires:	python3-setuptools
 BuildRequires:	imagemagick
-BuildRequires:	python-which
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
 BuildRequires:	texlive-latex-bin
@@ -37,14 +36,14 @@ into pure LaTeX as a first process.  MathML 2.0 markups
 are supported, too. It started as a clone of DB2LaTeX.
 
 %prep
-%setup -q
+%setup -qn %{name}-%{version}py3
 %autopatch -p1
 
 %build
-%{__python2} setup.py build
+%{__python3} setup.py build
 
 %install
-%{__python2} setup.py install --root %{buildroot}
+%{__python3} setup.py install --root %{buildroot}
 # these are already in tetex-latex:
 for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/; do
 	rm -rf %{buildroot}%{_datadir}/dblatex/latex/misc/$file
@@ -64,9 +63,9 @@ rm -rf %{buildroot}%{_datadir}/doc/
 sed -e 's/\r//' xsl/mathml2/README > README-xsltml
 touch -r xsl/mathml2/README README-xsltml
 cp -p %{SOURCE1} COPYING-docbook-xsl
-chmod +x %{buildroot}/%{py2_puresitedir}/dbtexmf/dblatex/xetex/*.py
+chmod +x %{buildroot}/%{py3_puresitedir}/dbtexmf/dblatex/xetex/*.py
 
-sed -i 's|python|python2|' %{buildroot}/%{_bindir}/dblatex
+sed -i 's|python|python3|' %{buildroot}/%{_bindir}/dblatex
 
 %post
 /usr/bin/texhash
@@ -77,8 +76,8 @@ sed -i 's|python|python2|' %{buildroot}/%{_bindir}/dblatex
 %files
 %{_mandir}/man1/dblatex.1*
 %doc COPYRIGHT docs/manual.pdf COPYING-docbook-xsl README-xsltml
-%{python2_sitelib}/dbtexmf/
-%{python2_sitelib}/dblatex-*.egg-info
+%{python3_sitelib}/dbtexmf/
+%{python3_sitelib}/dblatex-*.egg-info
 %{_bindir}/dblatex
 %{_datadir}/dblatex/
 %{_datadir}/texmf/tex/latex/dblatex/
