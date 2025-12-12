@@ -1,7 +1,7 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
 Version:	0.3.11
-Release:	3
+Release:	4
 Group:		Publishing
 License:	GPLv2+
 Url:		https://pypi.python.org/pypi/dblatex
