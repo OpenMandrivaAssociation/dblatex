@@ -12,7 +12,8 @@ Patch1:		dblatex-disable-debian.patch
 BuildArch:	noarch
 
 BuildRequires:	python3-devel
-BuildRequires:	python3-setuptools
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(zombie-imp)
 BuildRequires:	imagemagick
 BuildRequires:	tetex
 BuildRequires:	tetex-latex
