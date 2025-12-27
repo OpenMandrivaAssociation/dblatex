@@ -1,11 +1,11 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
-Version:	0.3.11
-Release:	4
+Version:	0.3.12
+Release:	1
 Group:		Publishing
 License:	GPLv2+
 Url:		https://pypi.python.org/pypi/dblatex
-Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}py3.tar.bz2
+Source0:	http://downloads.sourceforge.net/%{name}/%{name}3-%{version}.tar.bz2
 Source1:	COPYING-docbook-xsl
 Patch0:		dblatex-0.3.11-which-shutil.patch
 Patch1:		dblatex-disable-debian.patch
@@ -37,7 +37,7 @@ into pure LaTeX as a first process.  MathML 2.0 markups
 are supported, too. It started as a clone of DB2LaTeX.
 
 %prep
-%setup -qn %{name}-%{version}py3
+%setup -qn %{name}3-%{version}
 %autopatch -p1
 
 %build
