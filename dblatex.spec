@@ -1,7 +1,7 @@
 Summary:	DocBook to LaTeX/ConTeXt Publishing
 Name:		dblatex
 Version:	0.3.12
-Release:	1
+Release:	2
 Group:		Publishing
 License:	GPLv2+
 Url:		https://pypi.python.org/pypi/dblatex
@@ -15,18 +15,18 @@ BuildRequires:	python3-devel
 BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python%{pyver}dist(zombie-imp)
 BuildRequires:	imagemagick
-BuildRequires:	tetex
-BuildRequires:	tetex-latex
+BuildRequires:	texlive-tetex
+BuildRequires:	texlive-latex
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
-Requires:	tetex
-Requires:	tetex-latex
+Requires:	texlive-tetex
+Requires:	texlive-latex
 Requires:	texlive-latex-bin
 Requires:	transfig
-Requires:	xmltex
+Requires:	texlive-xmltex.bin
 Requires:	xsltproc
 Requires(post,postun):	kpathsea
 
