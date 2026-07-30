@@ -34,8 +34,8 @@ BuildRequires:  texlive-pdfpages
 BuildRequires:  texlive-subfigure
 BuildRequires:  texlive-stmaryrd
 BuildRequires:  texlive-wasysym
-BuildRequires:  texlive-collection-latex
-BuildRequires:  texlive-collection-xetex
+#BuildRequires:  texlive-collection-latex
+#BuildRequires:  texlive-collection-xetex
 
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
