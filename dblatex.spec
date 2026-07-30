@@ -20,6 +20,23 @@ BuildRequires:	texlive-latex
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 BuildRequires:	texlive(makeindex.bin)
+BuildRequires:	texlive-amsmath
+BuildRequires:	texlive-fancybox
+BuildRequires:	texlive-anysize
+BuildRequires:	texlive-appendix
+BuildRequires:	texlive-changebar
+BuildRequires:	texlive-footmisc
+BuildRequires:  texlive-jknapltx
+BuildRequires:  texlive-multirow
+BuildRequires:  texlive-overpic
+BuildRequires:  texlive-passivetex
+BuildRequires:  texlive-pdfpages
+BuildRequires:  texlive-subfigure
+BuildRequires:  texlive-stmaryrd
+BuildRequires:  texlive-wasysym
+BuildRequires:  texlive-collection-latex
+BuildRequires:  texlive-collection-xetex
+
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
