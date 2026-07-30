@@ -19,6 +19,7 @@ BuildRequires:	texlive-tetex
 BuildRequires:	texlive-latex
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
+BuildRequires:	texlive(makeindex.bin)
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
