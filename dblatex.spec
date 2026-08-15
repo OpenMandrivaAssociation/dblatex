@@ -20,6 +20,45 @@ BuildRequires:	imagemagick
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 BuildRequires:	texlive-makeindex
+
+BuildRequires:	texlive-amsmath
+BuildRequires:	texlive-amsfonts
+BuildRequires:	texlive-amsmath
+BuildRequires:	texlive-anysize
+BuildRequires:	texlive-appendix
+BuildRequires:	texlive-bookmark
+BuildRequires: texlive-tools
+BuildRequires:	texlive-changebar
+BuildRequires: texlive-graphics
+BuildRequires:	texlive-colortbl
+BuildRequires:	texlive-psnfss
+BuildRequires:	texlive-amsfonts
+BuildRequires:	texlive-fancybox
+BuildRequires:	texlive-fancyhdr
+BuildRequires:	texlive-fancyvrb
+BuildRequires:	texlive-float
+BuildRequires:	texlive-footmisc
+BuildRequires:	texlive-graphics
+BuildRequires:	texlive-psnfss
+BuildRequires: texlive-tools
+BuildRequires:	texlive-hyperref
+BuildRequires:	texlive-iftex
+BuildRequires:	texlive-latex
+BuildRequires:	texlive-listings
+BuildRequires:	texlive-fontinst
+BuildRequires:	texlive-jknapltx
+BuildRequires:	texlive-multirow
+BuildRequires:	texlive-overpic
+BuildRequires:	texlive-psnfss
+BuildRequires:	texlive-pdfpages
+BuildRequires:	texlive-refcount
+BuildRequires:	texlive-rotating
+BuildRequires:	texlive-stmaryrd
+BuildRequires:	texlive-subfigure
+BuildRequires:	texlive-titlesec
+BuildRequires:	texlive-wasysym
+
+
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
