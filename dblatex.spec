@@ -81,6 +81,7 @@ are supported, too. It started as a clone of DB2LaTeX.
 %autopatch -p1
 
 %build
+export TEXINPUTS="/usr/share/texmf-dist//:"
 %{__python3} setup.py build
 
 %install
