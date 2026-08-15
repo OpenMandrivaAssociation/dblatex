@@ -21,6 +21,7 @@ BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 BuildRequires:	texlive-makeindex
 BuildRequires:	texlive-kpathsea.bin
+BuildRequires:	texlive-texlive-scripts
 BuildRequires:	texlive-amsmath
 BuildRequires:	texlive-amsfonts
 BuildRequires:	texlive-amsmath
