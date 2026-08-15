@@ -20,16 +20,16 @@ BuildRequires:	imagemagick
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 BuildRequires:	texlive-makeindex
-
+BuildRequires:	texlive-kpathsea.bin
 BuildRequires:	texlive-amsmath
 BuildRequires:	texlive-amsfonts
 BuildRequires:	texlive-amsmath
 BuildRequires:	texlive-anysize
 BuildRequires:	texlive-appendix
 BuildRequires:	texlive-bookmark
-BuildRequires: texlive-tools
+BuildRequires:	texlive-tools
 BuildRequires:	texlive-changebar
-BuildRequires: texlive-graphics
+BuildRequires:	texlive-graphics
 BuildRequires:	texlive-colortbl
 BuildRequires:	texlive-psnfss
 BuildRequires:	texlive-amsfonts
@@ -40,7 +40,6 @@ BuildRequires:	texlive-float
 BuildRequires:	texlive-footmisc
 BuildRequires:	texlive-graphics
 BuildRequires:	texlive-psnfss
-BuildRequires: texlive-tools
 BuildRequires:	texlive-hyperref
 BuildRequires:	texlive-iftex
 BuildRequires:	texlive-latex
@@ -81,7 +80,14 @@ are supported, too. It started as a clone of DB2LaTeX.
 %autopatch -p1
 
 %build
-export TEXINPUTS="/usr/share/texmf-dist//:"
+texhash
+
+echo "=== TEX TEST ==="
+kpsewhich amsmath.sty || true
+kpsewhich amssymb.sty || true
+kpsewhich graphicx.sty || true
+kpsewhich hyperref.sty || true
+echo "=== END TEX TEST ==="
 %{__python3} setup.py build
 
 %install
