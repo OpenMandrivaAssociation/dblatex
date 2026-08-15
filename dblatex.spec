@@ -15,8 +15,8 @@ BuildRequires:	python3-devel
 BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python%{pyver}dist(zombie-imp)
 BuildRequires:	imagemagick
-BuildRequires:	tetex
-BuildRequires:	tetex-latex
+#BuildRequires:	tetex
+#BuildRequires:	tetex-latex
 BuildRequires:	texlive-latex-bin
 BuildRequires:	xsltproc
 Requires:	docbook-dtd44-xml
