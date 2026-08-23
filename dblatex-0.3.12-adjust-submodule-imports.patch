@@ -1,0 +1,46 @@
+Description: Python 3.12 compatibility: adjust submodule imports
+ importlib imports behave differently in py 3.11 and py 3.12: py 3.12
+ requires explicit imports of the submodules.
+ .
+ While fixing this, reduce the imports to the used submodules. Currently,
+ the base is still imported automatically.
+Forwarded: https://sourceforge.net/p/dblatex/patches/13/
+Author: Michael J Gruber <github@grubix.eu>
+Last-Update: 2023-07-06
+
+--- a/lib/dbtexmf/core/dbtex.py
++++ b/lib/dbtexmf/core/dbtex.py
+@@ -15,7 +15,8 @@
+ except ImportError:
+     from urllib.request import pathname2url
+ import glob
+-import importlib
++import importlib.machinery
++import importlib.util
+ from optparse import OptionParser
+ from io import open
+ 
+--- a/lib/dbtexmf/dblatex/grubber/plugins.py
++++ b/lib/dbtexmf/dblatex/grubber/plugins.py
+@@ -4,7 +4,8 @@
+ Mechanisms to dynamically load extra modules to help the LaTeX compilation.
+ All the modules must be derived from the TexModule class.
+ """
+-import importlib
++import importlib.machinery
++import importlib.util
+ 
+ from os.path import *
+ from dbtexmf.dblatex.grubber.msg import _, msg
+--- a/lib/dbtexmf/xslt/xslt.py
++++ b/lib/dbtexmf/xslt/xslt.py
+@@ -2,7 +2,8 @@
+ # Very simple plugin loader for Xslt classes
+ #
+ import os
+-import importlib
++import importlib.machinery
++import importlib.util
+ import glob
+ import sys
+ 

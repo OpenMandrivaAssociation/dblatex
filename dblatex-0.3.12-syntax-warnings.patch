@@ -1,0 +1,78 @@
+Description: Fix several SyntaxWarnings
+ Use raw strings to avoid invalid escape sequence
+Author: Graham Inggs <ginggs@debian.org>
+Last-Update: 2024-01-22
+
+--- a/lib/dbtexmf/dblatex/grubber/texparser.py
++++ b/lib/dbtexmf/dblatex/grubber/texparser.py
+@@ -31,7 +31,7 @@
+         # Make a "foo|bar\*stub" list
+         hooklist = [x.replace("*", "\\*") for x in self.hooks]
+ 
+-        pattern = "\\\\(?P<name>%s)\*?"\
++        pattern = r"\\\\(?P<name>%s)\*?"\
+                   " *(\\[(?P<opt>[^\\]]*)\\])?"\
+                   " *({(?P<arg>[^{}]*)}|(?=[^A-Za-z]))"
+ 
+--- a/lib/dbtexmf/dblatex/texcodec.py
++++ b/lib/dbtexmf/dblatex/texcodec.py
+@@ -26,7 +26,7 @@
+             l.append(unient.unicode_map[ord(c)])
+         except KeyError:
+             print("Missing character &#x%x;" % ord(c))
+-            l.append("\&\#x%x;" % ord(c))
++            l.append(r"\&\#x%x;" % ord(c))
+         if post: l.append(post)
+         n = n + 1
+     tex_handler_counter[name] = n
+--- a/lib/dbtexmf/dblatex/texhyphen.py
++++ b/lib/dbtexmf/dblatex/texhyphen.py
+@@ -20,7 +20,7 @@
+     """
+     def __init__(self, codec=None):
+         self.codec = codec
+-        self.hyphenchar = b"\-"
++        self.hyphenchar = r"\-"
+ 
+     def hyphenate(self, text):
+         if self.codec: text = self.codec.decode(text)
+@@ -32,7 +32,7 @@
+ 
+ 
+ class UrlHyphenator(Hyphenator):
+-    """
++    r"""
+     Hyphenates <text> so that cutting is easier on URL separators.
+     The hyphen chars are expected to be void to prevent from spurious
+     characters in displayed filenames or URLs.
+@@ -51,7 +51,7 @@
+     existing latex styles.
+     """
+     def __init__(self, codec=None,
+-                 h_sep=b"\penalty0{}", h_char=b"\penalty5000{}",
++                 h_sep=r"\penalty0{}", h_char=r"\penalty5000{}",
+                  h_start=3, h_stop=3):
+         self.codec = codec
+         self.seps = r":/\@=?#;-."
+--- a/lib/dbtexmf/dblatex/xetex/fcmanager.py
++++ b/lib/dbtexmf/dblatex/xetex/fcmanager.py
+@@ -48,7 +48,7 @@
+             if i: self._buildattr(i)
+         
+         # Check the consistency
+-        if self.family != self.name.replace("\-", "-"):
++        if self.family != self.name.replace(r"\-", "-"):
+             raise ValueError("Unknown font '%s' vs '%s'" % (self.name,
+             self.family))
+ 
+--- a/lib/dbtexmf/dblatex/xetex/fontspec.py
++++ b/lib/dbtexmf/dblatex/xetex/fontspec.py
+@@ -195,7 +195,7 @@
+         """
+         s = ''
+         for type, font in fonts.items():
+-            s += '\switch%sfont{%s}' % (type, font)
++            s += r'\switch%sfont{%s}' % (type, font)
+         if s:
+             s = r"\savefamily" + s + r"\loadfamily{}"
+         return s
