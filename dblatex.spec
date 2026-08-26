@@ -16,11 +16,32 @@ BuildArch:	noarch
 
 BuildRequires:	python
 BuildRequires:	python%{pyver}dist(setuptools)
-# setup.py install runs kpsewhich against every \usepackage in the
-# shipped .sty files and aborts if any is missing. That is a runtime
-# sanity check, not a build step: mock never refreshes ls-R for the
-# mockbuild user, so even installed texlive() modules look absent.
-# --nodeps skips it; the Requires below are the real dependency list.
+BuildRequires:	imagemagick
+BuildRequires:	xsltproc
+# setup.py install probes latex/pdflatex/kpsewhich and a set of .sty files.
+# Depend on the individual modules, not collection-latexrecommended: that
+# collection is published but several of its own texlive() deps are not.
+BuildRequires:	texlive(latex-bin)
+BuildRequires:	texlive(makeindex)
+BuildRequires:	texlive(collection-latex)
+BuildRequires:	texlive(anysize)
+BuildRequires:	texlive(appendix)
+BuildRequires:	texlive(changebar)
+BuildRequires:	texlive(fancybox)
+BuildRequires:	texlive(fancyvrb)
+BuildRequires:	texlive(float)
+BuildRequires:	texlive(footmisc)
+BuildRequires:	texlive(jknapltx)
+BuildRequires:	texlive(listings)
+BuildRequires:	texlive(multirow)
+# overpic/pdfpages mass-rebuilds have not landed yet, so the published
+# packages do not Provide texlive(name). Use the RPM names until they do.
+BuildRequires:	texlive-overpic
+BuildRequires:	texlive-pdfpages
+BuildRequires:	texlive(subfigure)
+BuildRequires:	texlive(stmaryrd)
+BuildRequires:	texlive(titlesec)
+BuildRequires:	texlive(wasysym)
 Requires:	docbook-dtd44-xml
 Requires:	docbook-dtd45-xml
 Requires:	imagemagick
@@ -72,7 +93,7 @@ are supported, too. It started as a clone of DB2LaTeX.
 python setup.py build
 
 %install
-python setup.py install --root %{buildroot} --nodeps
+python setup.py install --root %{buildroot}
 # these are already in TeX Live packages:
 for file in bibtopic.sty enumitem.sty ragged2e.sty passivetex/; do
 	rm -rf %{buildroot}%{_datadir}/dblatex/latex/misc/$file
